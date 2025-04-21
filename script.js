@@ -29,6 +29,8 @@ function pickSlide(number, returnOnly = false) {
 
   document.getElementById("title").innerText =
     "Daily Dose of GPS Quotes (" + number.toString() + ")";
+
+  window.location.hash = "slide-" + number.toString();
 }
 
 document.getElementById("icon").href =
@@ -57,3 +59,13 @@ setTimeout(() => {
 }, 1000);
 
 function slideAnimation() {}
+
+if (window.location.hash) {
+  const hash = window.location.hash.substring(1);
+  if (hash.startsWith("slide-")) {
+    const slideNumber = parseInt(hash.substring(6), 10);
+    if (!isNaN(slideNumber)) {
+      pickSlide(slideNumber, true);
+    }
+  }
+}
