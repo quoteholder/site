@@ -32,8 +32,8 @@ function pickSlide(number, returnOnly = false) {
 }
 
 document.getElementById("icon").href =
-  "https://dailydoseofgpsquotes.com/slides/Famous GPS QUotes (The Archive)-images-" +
-  Math.floor(Math.random() * 542).toString() +
+  "https://dailydoseofgpsquotes.com/icons/DDOGPSQICONZ-" +
+  Math.floor(Math.random() * 42).toString() +
   ".jpg";
 
 function seededRandom(seed) {
