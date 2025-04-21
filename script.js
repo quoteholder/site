@@ -1,0 +1,59 @@
+let total = 542;
+
+function pickSlide(number, returnOnly = false) {
+  if (!number) {
+    number = Math.floor(Math.random() * (total - 3)) + 3;
+  }
+
+  number = number % total || total;
+
+  document.getElementById("imagetransition").src =
+    "slides/Famous GPS QUotes (The Archive)-images-" +
+    number.toString() +
+    ".jpg";
+  document.getElementById("image").style.animation =
+    "transition0 1s ease-in-out forwards";
+  document.getElementById("imagetransition").style.animation =
+    "transition1 1s ease-in-out forwards";
+  document.getElementById("imagetransition").style.display = "block";
+
+  setTimeout(() => {
+    document.getElementById("image").src =
+      document.getElementById("imagetransition").src;
+    setTimeout(() => {
+      document.getElementById("imagetransition").style.display = "none";
+      document.getElementById("image").style.animation = "none";
+      document.getElementById("imagetransition").style.animation = "none";
+    }, 10);
+  }, 1000);
+
+  document.getElementById("title").innerText =
+    "Daily Dose of GPS Quotes (" + number.toString() + ")";
+}
+
+document.getElementById("icon").href =
+  "https://dailydoseofgpsquotes.com/slides/Famous GPS QUotes (The Archive)-images-" +
+  Math.floor(Math.random() * 542).toString() +
+  ".jpg";
+
+function seededRandom(seed) {
+  let x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
+function getDailyRandom(min = 0, max = 1) {
+  const date = new Date();
+  const seed =
+    date.getFullYear() * 1000 + date.getMonth() * 100 + date.getDate();
+  const rand = seededRandom(seed);
+  return Math.floor(rand * (max - min + 1)) + min;
+}
+
+pickSlide(getDailyRandom(0, 1e64));
+
+setTimeout(() => {
+  document.getElementById("loader").style.animation =
+    "loader 1s ease-in-out forwards";
+}, 1000);
+
+function slideAnimation() {}
