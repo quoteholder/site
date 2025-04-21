@@ -1,9 +1,28 @@
 <html>
   <head>
     <title id="title">Daily Dose of GPS Quotes (0)</title>
-    <link rel="icon" href="https://quotes.ady.best/slides/Famous GPS QUotes (The Archive)-images-0.jpg" id="icon">
+    <link rel="icon" href="https://dailydoseofgpsquotes.com/slides/Famous GPS QUotes (The Archive)-images-0.jpg" id="icon">
   </head>
   <body>
+    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%">
+      <p>Daily Dose Of</p>
+      <h1><span>GPS</span> Quotes</h1>
+    </div>
+    <style>
+      p {
+        font-family: monospace;
+        text-align: left;
+        color: #444;
+      }
+      h1 {
+        font-family: monospace;
+        text-align: center;
+        color: #fff;
+      }
+      span {
+        color: #060;
+      }
+    </style>
     <img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" src="/" id="image" onclick="pick();">
     <script>
       let total = 542;
@@ -15,7 +34,7 @@
         document.getElementById("image").src = "slides/Famous GPS QUotes (The Archive)-images-" + number.toString() + ".jpg";
         document.getElementById("title").innerText = "Daily Dose of GPS Quotes (" + number.toString() + ")";
       }
-      document.getElementById("icon").href = "https://quotes.ady.best/slides/Famous GPS QUotes (The Archive)-images-" + Math.floor(Math.random() * 542).toString() + ".jpg";
+      document.getElementById("icon").href = "https://dailydoseofgpsquotes.com/slides/Famous GPS QUotes (The Archive)-images-" + Math.floor(Math.random() * 542).toString() + ".jpg";
       window.onload = () => {
         alert("You can click to view more random slides.");
       };
