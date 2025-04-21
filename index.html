@@ -1,5 +1,8 @@
-<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" src="/" id="image">
+<img style="position: absolute; top: 0; left: 0; width: 100%; height: 100%" src="/" id="image" onclick="pick();">
 <title>Daily Quotes</title>
 <script>
-  document.getElementById("image").src = "slides/Famous GPS QUotes (The Archive)-images-" + Math.floor(Math.random() * 542).toString() + ".jpg";
+  function pick() {
+    document.getElementById("image").src = "slides/Famous GPS QUotes (The Archive)-images-" + Math.floor(Math.random() * 542).toString() + ".jpg";
+  }
+  pick();
 </script>
