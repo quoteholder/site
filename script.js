@@ -9,18 +9,18 @@ function pickSlide(number, returnOnly = false) {
 
   number = number % total || total;
 
-  let alt = false;
+  let useAlt = false;
   let last = parseInt(window.location.hash.substring(7), 10);
 
   if (alt.includes(last)) {
     number = last;
-    alt = true;
+    useAlt = true;
   }
   
   // alert(alt);
 
   document.getElementById("imagetransition").src =
-    "slides/" + (alt ? "alt/" : "") + "Famous GPS QUotes (The Archive)-images-" +
+    "slides/" + (useAlt ? "alt/" : "") + "Famous GPS QUotes (The Archive)-images-" +
     number.toString() +
     ".jpg";
   document.getElementById("image").style.animation =
