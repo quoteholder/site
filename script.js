@@ -11,8 +11,8 @@ function pickSlide(number, returnOnly = false) {
 
   let alt = false;
 
-  if (alt.includes(parseInt(document.getElementById("image").src.split("-")[2].split(".")[0]) - 1)) {
-    number = parseInt(document.getElementById("image").src.split("-")[2].split(".")[0]) - 1;
+  if (alt.includes(parseInt(document.getElementById("image").src.split("-")[2].split(".")[0]) + 1)) {
+    number = parseInt(document.getElementById("image").src.split("-")[2].split(".")[0]);
     alt = true;
   }
 
