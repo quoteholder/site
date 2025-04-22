@@ -1,7 +1,7 @@
 let total = 542;
 
 function pickSlide(number, returnOnly = false) {
-  if (!number) {
+  if (!number && number !== 0) {
     number = Math.floor(Math.random() * (total - 3)) + 3;
   }
 
