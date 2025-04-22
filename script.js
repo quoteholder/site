@@ -46,7 +46,7 @@ function seededRandom(seed) {
 function getDailyRandom(min = 0, max = 1) {
   const date = new Date();
   const seed =
-    date.getFullYear() * 1000 + date.getMonth() * 100 + date.getDate();
+    date.getFullYear() * 1000 + date.getMonth() * 100 + (date.getDate() - (date.getHours() >= 11 ? 1 : 0));
   const rand = seededRandom(seed);
   return Math.floor(rand * (max - min + 1)) + min;
 }
