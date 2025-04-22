@@ -1,4 +1,4 @@
-let total = 542;
+let total = 545 - 1;
 
 function pickSlide(number, returnOnly = false) {
   if (!number && number !== 0) {
