@@ -51,8 +51,6 @@ function getDailyRandom(min = 0, max = 1) {
   return Math.floor(rand * (max - min + 1)) + min;
 }
 
-pickSlide(getDailyRandom(0, 1e64));
-
 setTimeout(() => {
   document.getElementById("loader").style.animation =
     "loader 1s ease-in-out forwards";
@@ -68,4 +66,6 @@ if (window.location.hash) {
       pickSlide(slideNumber, true);
     }
   }
+} else {
+  pickSlide(getDailyRandom(0, 1e64));
 }
