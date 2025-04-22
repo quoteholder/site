@@ -39,7 +39,7 @@ function pickSlide(number, returnOnly = false) {
       document.getElementById("image").style.animation = "none";
       document.getElementById("imagetransition").style.animation = "none";
     }, 10);
-    history.append(number);
+    history.push(number);
   }, 1000);
 
   document.getElementById("title").innerText =
