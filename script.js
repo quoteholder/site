@@ -2,6 +2,8 @@ let total = 545 - 1;
 
 let alt = [197, 232];
 
+let history = [];
+
 function pickSlide(number, returnOnly = false) {
   if (!number && number !== 0) {
     number = Math.floor(Math.random() * (total - 3)) + 3;
@@ -12,7 +14,7 @@ function pickSlide(number, returnOnly = false) {
   let useAlt = false;
   let last = parseInt(window.location.hash.substring(7), 10);
 
-  if (alt.includes(last)) {
+  if (alt.includes(last) && history.length != 0) {
     number = last;
     useAlt = true;
   }
@@ -37,6 +39,7 @@ function pickSlide(number, returnOnly = false) {
       document.getElementById("image").style.animation = "none";
       document.getElementById("imagetransition").style.animation = "none";
     }, 10);
+    history.append(number);
   }, 1000);
 
   document.getElementById("title").innerText =
