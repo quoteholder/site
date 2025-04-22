@@ -15,6 +15,8 @@ function pickSlide(number, returnOnly = false) {
     number = parseInt(document.getElementById("image").src.split("-")[2].split(".")[0]);
     alt = true;
   }
+  
+  alert(alt);
 
   document.getElementById("imagetransition").src =
     "slides/" + (alt ? "alt/" : "") + "Famous GPS QUotes (The Archive)-images-" +
