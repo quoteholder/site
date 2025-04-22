@@ -10,13 +10,14 @@ function pickSlide(number, returnOnly = false) {
   number = number % total || total;
 
   let alt = false;
+  let last = parseInt(window.location.hash.substring(7))
 
-  if (alt.includes(parseInt(document.getElementById("image").src.split("-")[2].split(".")[0]) + 1)) {
-    number = parseInt(document.getElementById("image").src.split("-")[2].split(".")[0]);
+  if (alt.includes(last + 1)) {
+    number = last;
     alt = true;
   }
   
-  alert(alt);
+  // alert(alt);
 
   document.getElementById("imagetransition").src =
     "slides/" + (alt ? "alt/" : "") + "Famous GPS QUotes (The Archive)-images-" +
