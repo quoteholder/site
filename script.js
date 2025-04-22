@@ -35,7 +35,7 @@ function pickSlide(number, returnOnly = false) {
 
 document.getElementById("icon").href =
   "https://dailydoseofgpsquotes.com/icons/DDOGPSQICONZ-" +
-  Math.floor(Math.random() * 42).toString() +
+  ((Math.floor(Math.random() * 420) + 1) % 42).toString() +
   ".jpg";
 
 function seededRandom(seed) {
