@@ -1,5 +1,7 @@
 let total = 545 - 1;
 
+let alt = [197, 232];
+
 function pickSlide(number, returnOnly = false) {
   if (!number && number !== 0) {
     number = Math.floor(Math.random() * (total - 3)) + 3;
@@ -7,8 +9,15 @@ function pickSlide(number, returnOnly = false) {
 
   number = number % total || total;
 
+  let alt = false;
+
+  if (alt.includes(parseInt(document.getElementById("image").src.split("-")[2].split(".")[0]) - 1)) {
+    number = parseInt(document.getElementById("image").src.split("-")[2].split(".")[0]) - 1;
+    alt = true;
+  }
+
   document.getElementById("imagetransition").src =
-    "slides/Famous GPS QUotes (The Archive)-images-" +
+    "slides/" + (alt ? "alt/" : "") + "Famous GPS QUotes (The Archive)-images-" +
     number.toString() +
     ".jpg";
   document.getElementById("image").style.animation =
