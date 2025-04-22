@@ -69,3 +69,9 @@ if (window.location.hash) {
 } else {
   pickSlide(getDailyRandom(0, 1e64));
 }
+
+window.addEventListener('keydown', function(event) {
+  if (event.key === ' ') {
+    pickSlide();
+  }
+});
