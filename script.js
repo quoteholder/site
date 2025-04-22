@@ -10,9 +10,9 @@ function pickSlide(number, returnOnly = false) {
   number = number % total || total;
 
   let alt = false;
-  let last = parseInt(window.location.hash.substring(7))
+  let last = parseInt(window.location.hash.substring(7), 10);
 
-  if (alt.includes(last + 1)) {
+  if (alt.includes(last)) {
     number = last;
     alt = true;
   }
