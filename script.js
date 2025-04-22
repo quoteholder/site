@@ -28,9 +28,9 @@ function pickSlide(number, returnOnly = false) {
   }, 1000);
 
   document.getElementById("title").innerText =
-    "Daily Dose of GPS Quotes (" + number.toString() + ")";
+    "Daily Dose of GPS Quotes (" + (number + 1).toString() + ")";
 
-  window.location.hash = "slide-" + number.toString();
+  window.location.hash = "slide-" + (number + 1).toString();
 }
 
 document.getElementById("icon").href =
@@ -63,7 +63,7 @@ if (window.location.hash) {
   if (hash.startsWith("slide-")) {
     const slideNumber = parseInt(hash.substring(6), 10);
     if (!isNaN(slideNumber)) {
-      pickSlide(slideNumber, true);
+      pickSlide(slideNumber - 1, true);
     }
   }
 } else {
