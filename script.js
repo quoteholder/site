@@ -4,10 +4,13 @@ let alt = [197, 232];
 
 let history = [];
 
-function pickSlide(number, returnOnly = false) {
-  if (!number && number !== 0) {
-    number = Math.floor(Math.random() * (total - 3)) + 3;
-  }
+let historyindex = 0;
+
+function randomise() {
+  return Math.floor(Math.random() * (total - 3)) + 3;
+}
+
+function pickSlide(number, backwards, add) {
 
   number = number % total || total;
 
@@ -18,17 +21,21 @@ function pickSlide(number, returnOnly = false) {
     number = last;
     useAlt = true;
   }
-  
+
   // alert(alt);
 
   document.getElementById("imagetransition").src =
-    "slides/" + (useAlt ? "alt/" : "") + "quotes-" +
-    number.toString() +
-    ".png";
+    "slides/" + (useAlt ? "alt/" : "") + "quotes-" + number.toString() + ".png";
   document.getElementById("image").style.animation =
-    "transition0 1s ease-in-out forwards";
+    "transition" +
+    (backwards ? "1" : "0") +
+    " 1s ease-in-out forwards" +
+    (backwards ? " reverse" : "");
   document.getElementById("imagetransition").style.animation =
-    "transition1 1s ease-in-out forwards";
+    "transition" +
+    (backwards ? "0" : "1") +
+    " 1s ease-in-out forwards" +
+    (backwards ? " reverse" : "");
   document.getElementById("imagetransition").style.display = "block";
 
   setTimeout(() => {
@@ -39,13 +46,15 @@ function pickSlide(number, returnOnly = false) {
       document.getElementById("image").style.animation = "none";
       document.getElementById("imagetransition").style.animation = "none";
     }, 10);
-    history.push(number);
+    if (add) {
+      history.push(number);
+    }
   }, 1000);
 
   document.getElementById("title").innerText =
-    "Daily Dose of GPS QUotes (" + (number).toString() + ")";
+    "Daily Dose of GPS QUotes (" + number.toString() + ")";
 
-  window.location.hash = "slide-" + (number).toString();
+  window.location.hash = "slide-" + number.toString();
 }
 
 document.getElementById("icon").href =
@@ -61,7 +70,9 @@ function seededRandom(seed) {
 function getDailyRandom(min = 0, max = 1) {
   const date = new Date();
   const seed =
-    date.getFullYear() * 1000 + date.getMonth() * 100 + (date.getDate() - (date.getHours() >= 12 ? 1 : 0));
+    date.getFullYear() * 1000 +
+    date.getMonth() * 100 +
+    (date.getDate() - (date.getHours() >= 12 ? 1 : 0));
   const rand = seededRandom(seed);
   return Math.floor(rand * (max - min + 1)) + min;
 }
@@ -78,15 +89,26 @@ if (window.location.hash) {
   if (hash.startsWith("slide-")) {
     const slideNumber = parseInt(hash.substring(6), 10);
     if (!isNaN(slideNumber)) {
-      pickSlide(slideNumber - 1, true);
+      pickSlide(slideNumber, false, true);
     }
   }
 } else {
-  pickSlide(getDailyRandom(0, 1e64));
+  pickSlide(getDailyRandom(0, 1e64), false, true);
 }
 
-window.addEventListener('keydown', function(event) {
-  if (event.key === ' ') {
-    pickSlide();
+window.addEventListener("keyup", function (event) {
+  if (event.key === " " || event.key === "ArrowRight") {
+    if (historyindex + 1 < history.length) {
+      historyindex++;
+      pickSlide(history[historyindex], false, false);
+    } else {
+      pickSlide(randomise(), false, true);
+      historyindex++;
+    }
+  } else if (event.key === "ArrowLeft") {
+    if (historyindex - 1 >= 0) {
+      historyindex--;
+      pickSlide(history[historyindex], true, false);
+    }
   }
 });
