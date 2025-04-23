@@ -1,4 +1,4 @@
-let total = 545 - 1;
+let total = 547;
 
 let alt = [197, 232];
 
@@ -22,9 +22,9 @@ function pickSlide(number, returnOnly = false) {
   // alert(alt);
 
   document.getElementById("imagetransition").src =
-    "slides/" + (useAlt ? "alt/" : "") + "Famous GPS QUotes (The Archive)-images-" +
+    "slides/" + (useAlt ? "alt/" : "") + "quotes-" +
     number.toString() +
-    ".jpg";
+    ".png";
   document.getElementById("image").style.animation =
     "transition0 1s ease-in-out forwards";
   document.getElementById("imagetransition").style.animation =
@@ -43,9 +43,9 @@ function pickSlide(number, returnOnly = false) {
   }, 1000);
 
   document.getElementById("title").innerText =
-    "Daily Dose of GPS Quotes (" + (number + 1).toString() + ")";
+    "Daily Dose of GPS QUotes (" + (number).toString() + ")";
 
-  window.location.hash = "slide-" + (number + 1).toString();
+  window.location.hash = "slide-" + (number).toString();
 }
 
 document.getElementById("icon").href =
