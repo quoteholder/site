@@ -151,6 +151,16 @@ window.addEventListener("keyup", function (event) {
 });
 
 function imageClick() {
-  pickSlide(randomise(), false, true);
-  historyindex++;
+  let last = window.location.hash.includes("alt-")
+    ? 0
+    : parseInt(window.location.hash.substring(7), 10);
+
+  if (alt.includes(last) && history.length != 0 && !justDidAlt) {
+    pickSlide(last, false, false);
+  } else {
+    pickSlide(randomise(), false, true);
+    if (!justDidAlt) {
+      historyindex++;
+    }
+  }
 }
