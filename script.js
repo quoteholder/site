@@ -8,6 +8,8 @@ let historyindex = 0;
 
 let changing = false;
 
+let justDidAlt = false;
+
 function randomise() {
   return Math.floor(Math.random() * (total - 3)) + 3;
 }
@@ -20,9 +22,12 @@ function pickSlide(number, backwards, add) {
   let useAlt = false;
   let last = parseInt(window.location.hash.substring(7), 10);
 
-  if (alt.includes(last) && history.length != 0) {
+  if (alt.includes(last) && history.length != 0 && !backwards) {
     number = last;
     useAlt = true;
+    justDidAlt = true;
+  } else {
+    justDidAlt = false;
   }
 
   // alert(alt);
@@ -59,7 +64,7 @@ function pickSlide(number, backwards, add) {
   document.getElementById("title").innerText =
     "Daily Dose of GPS QUotes (" + number.toString() + ")";
 
-  window.location.hash = "slide-" + number.toString();
+  window.location.hash = "slide-" + (useAlt ? "alt-" : "") + number.toString();
 }
 
 document.getElementById("icon").href =
@@ -92,7 +97,11 @@ function slideAnimation() {}
 if (window.location.hash) {
   const hash = window.location.hash.substring(1);
   if (hash.startsWith("slide-")) {
-    const slideNumber = parseInt(hash.substring(6), 10);
+    let string = 6;
+    if (hash.includes("alt")) {
+      string = 10;
+    }
+    const slideNumber = parseInt(hash.substring(string), 10);
     if (!isNaN(slideNumber)) {
       pickSlide(slideNumber, false, true);
     }
@@ -105,11 +114,31 @@ window.addEventListener("keyup", function (event) {
   if (!changing) {
     if (event.key === " " || event.key === "ArrowRight") {
       if (historyindex + 1 < history.length) {
-        historyindex++;
-        pickSlide(history[historyindex], false, false);
+        let last = window.location.hash.includes("alt-")
+          ? 0
+          : parseInt(window.location.hash.substring(7), 10);
+
+        if (alt.includes(last) && history.length != 0 && !justDidAlt) {
+          pickSlide(last, false, false);
+        } else {
+          pickSlide(history[historyindex + 1], false, true);
+          if (!justDidAlt) {
+            historyindex++;
+          }
+        }
       } else {
-        pickSlide(randomise(), false, true);
-        historyindex++;
+        let last = window.location.hash.includes("alt-")
+          ? 0
+          : parseInt(window.location.hash.substring(7), 10);
+
+        if (alt.includes(last) && history.length != 0 && !justDidAlt) {
+          pickSlide(last, false, false);
+        } else {
+          pickSlide(randomise(), false, true);
+          if (!justDidAlt) {
+            historyindex++;
+          }
+        }
       }
     } else if (event.key === "ArrowLeft") {
       if (historyindex - 1 >= 0) {
@@ -117,6 +146,7 @@ window.addEventListener("keyup", function (event) {
         pickSlide(history[historyindex], true, false);
       }
     }
+    // alert(historyindex);
   }
 });
 
