@@ -6,11 +6,14 @@ let history = [];
 
 let historyindex = 0;
 
+let changing = false;
+
 function randomise() {
   return Math.floor(Math.random() * (total - 3)) + 3;
 }
 
 function pickSlide(number, backwards, add) {
+  changing = true;
 
   number = number % total || total;
 
@@ -45,6 +48,7 @@ function pickSlide(number, backwards, add) {
       document.getElementById("imagetransition").style.display = "none";
       document.getElementById("image").style.animation = "none";
       document.getElementById("imagetransition").style.animation = "none";
+      changing = false;
     }, 10);
     if (add) {
       history.push(number);
@@ -97,18 +101,20 @@ if (window.location.hash) {
 }
 
 window.addEventListener("keyup", function (event) {
-  if (event.key === " " || event.key === "ArrowRight") {
-    if (historyindex + 1 < history.length) {
-      historyindex++;
-      pickSlide(history[historyindex], false, false);
-    } else {
-      pickSlide(randomise(), false, true);
-      historyindex++;
-    }
-  } else if (event.key === "ArrowLeft") {
-    if (historyindex - 1 >= 0) {
-      historyindex--;
-      pickSlide(history[historyindex], true, false);
+  if (!changing) {
+    if (event.key === " " || event.key === "ArrowRight") {
+      if (historyindex + 1 < history.length) {
+        historyindex++;
+        pickSlide(history[historyindex], false, false);
+      } else {
+        pickSlide(randomise(), false, true);
+        historyindex++;
+      }
+    } else if (event.key === "ArrowLeft") {
+      if (historyindex - 1 >= 0) {
+        historyindex--;
+        pickSlide(history[historyindex], true, false);
+      }
     }
   }
 });
