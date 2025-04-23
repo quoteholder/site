@@ -53,6 +53,7 @@ function pickSlide(number, backwards, add) {
     if (add) {
       history.splice(historyindex, 0, number);
     }
+    console.log(history);
   }, 1000);
 
   document.getElementById("title").innerText =
