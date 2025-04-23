@@ -51,7 +51,7 @@ function pickSlide(number, backwards, add) {
       changing = false;
     }, 10);
     if (add) {
-      history.push(number);
+      history.splice(historyindex, 0, number);
     }
   }, 1000);
 
@@ -118,3 +118,8 @@ window.addEventListener("keyup", function (event) {
     }
   }
 });
+
+function imageClick() {
+  pickSlide(randomise(), false, true);
+  historyindex++;
+}
