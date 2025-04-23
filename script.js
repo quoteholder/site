@@ -58,7 +58,7 @@ function pickSlide(number, backwards, add) {
     if (add) {
       history.splice(historyindex, 0, number);
     }
-    console.log(history);
+    console.log(history, historyindex);
   }, 1000);
 
   document.getElementById("title").innerText =
@@ -114,28 +114,36 @@ window.addEventListener("keyup", function (event) {
   if (!changing) {
     if (event.key === " " || event.key === "ArrowRight") {
       if (historyindex + 1 < history.length) {
+        console.log("case 1");
         let last = window.location.hash.includes("alt-")
           ? 0
           : parseInt(window.location.hash.substring(7), 10);
 
         if (alt.includes(last) && history.length != 0 && !justDidAlt) {
           pickSlide(last, false, false);
+          console.log("alt");
         } else {
-          pickSlide(history[historyindex + 1], false, true);
+          pickSlide(history[historyindex + 1], false, false);
+          console.log("not alt");
           if (!justDidAlt) {
             historyindex++;
+            console.log("index up");
           }
         }
       } else {
+        console.log("case 2");
         let last = window.location.hash.includes("alt-")
           ? 0
           : parseInt(window.location.hash.substring(7), 10);
 
         if (alt.includes(last) && history.length != 0 && !justDidAlt) {
+          console.log("alt");
           pickSlide(last, false, false);
         } else {
           pickSlide(randomise(), false, true);
+          console.log("not alt");
           if (!justDidAlt) {
+            console.log("index up");
             historyindex++;
           }
         }
