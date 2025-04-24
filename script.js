@@ -88,7 +88,7 @@ function getDailyRandom(min = 0, max = 1) {
 setTimeout(() => {
   document.getElementById("loader").style.animation =
     "loader 1s ease-in-out forwards";
-}, 1000);
+}, 2.5 /* seconds */ * 1e3);
 
 // function slideAnimation() {}
 
@@ -111,7 +111,7 @@ if (window.location.hash) {
     }
   }
 } else {
-  pickSlide(getDailyRandom(0, 1e64), false, true);
+  pickSlide(getDailyRandom(0, total * 1e64), false, true);
 }
 
 function daysSinceDate(dateString) {
@@ -177,7 +177,7 @@ window.addEventListener("keyup", function (event) {
           "'s quote is daily quote #" +
           daysSinceDate("2025-04-21") +
           " (since the site started), and slide #" +
-          (getDailyRandom(0, 1e64) % total) +
+          (getDailyRandom(0, total * 1e64) % total) +
           "!"
       );
     }
