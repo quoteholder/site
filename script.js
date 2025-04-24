@@ -14,6 +14,11 @@ function randomise() {
   return Math.floor(Math.random() * (total - 3)) + 3;
 }
 
+function oneIn(chance) {
+  if (chance <= 0) throw new Error("Chance must be greater than 0.");
+  return Math.floor(Math.random() * chance) === 0;
+}
+
 function pickSlide(number, backwards, add) {
   changing = true;
 
@@ -31,6 +36,8 @@ function pickSlide(number, backwards, add) {
   }
 
   // alert(alt);
+  let rainbow = oneIn(10000000);
+  // let rainbow = oneIn(4);
 
   document.getElementById("imagetransition").src =
     "slides/" + (useAlt ? "alt/" : "") + "quotes-" + number.toString() + ".png";
@@ -51,9 +58,15 @@ function pickSlide(number, backwards, add) {
       document.getElementById("imagetransition").src;
     setTimeout(() => {
       document.getElementById("imagetransition").style.display = "none";
-      document.getElementById("image").style.animation = "none";
+      document.getElementById("image").style.animation = rainbow
+        ? "rainbow 5s linear infinite"
+        : "none";
       document.getElementById("imagetransition").style.animation = "none";
       changing = false;
+
+      if (rainbow) {
+        alert("1 in 10 million CHROMA QUOTE!!1!");
+      }
     }, 10);
     if (add) {
       history.splice(historyindex, 0, number);
