@@ -1,6 +1,6 @@
 let total = 556;
 
-let alt = [197, 232];
+let alt = [197, 204, 232];
 
 let history = [];
 
