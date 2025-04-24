@@ -90,7 +90,13 @@ setTimeout(() => {
     "loader 1s ease-in-out forwards";
 }, 1000);
 
-function slideAnimation() {}
+// function slideAnimation() {}
+
+const today = new Date();
+const formattedDate = `${String(today.getMonth() + 1).padStart(
+  2,
+  "0"
+)}/${String(today.getDate()).padStart(2, "0")}/${today.getFullYear()}`;
 
 if (window.location.hash) {
   const hash = window.location.hash.substring(1);
@@ -106,6 +112,14 @@ if (window.location.hash) {
   }
 } else {
   pickSlide(getDailyRandom(0, 1e64), false, true);
+}
+
+function daysSinceDate(dateString) {
+  const now = new Date();
+  const pastDate = new Date(dateString);
+  const timeDifference = now.getTime() - pastDate.getTime();
+  const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
+  return daysDifference;
 }
 
 window.addEventListener("keyup", function (event) {
@@ -153,6 +167,19 @@ window.addEventListener("keyup", function (event) {
       }
     } else if (event.key === " ") {
       imageClick();
+    } else if (event.key === "q") {
+      alert(
+        "Daily Dose of GPS QUotes Help\nClick / Space: New slide\nRight arrow: Next slide\nLeft arrow: Last slide\nEnter: Daily quote info\nQ: Help\nThanks for checking it out! :DD"
+      );
+    } else if (event.key === "Enter") {
+      alert(
+        formattedDate +
+          "'s quote is daily quote #" +
+          daysSinceDate("2025-04-21") +
+          " (since the site started), and slide #" +
+          (getDailyRandom(0, 1e64) % total) +
+          "!"
+      );
     }
     // alert(historyindex);
   }
