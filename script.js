@@ -110,7 +110,7 @@ if (window.location.hash) {
 
 window.addEventListener("keyup", function (event) {
   if (!changing) {
-    if (event.key === " " || event.key === "ArrowRight") {
+    if (event.key === "ArrowRight") {
       if (historyindex + 1 < history.length) {
         console.log("case 1");
         let last = window.location.hash.includes("alt-")
@@ -151,6 +151,8 @@ window.addEventListener("keyup", function (event) {
         historyindex--;
         pickSlide(history[historyindex], true, false);
       }
+    } else if (event.key === " ") {
+      imageClick();
     }
     // alert(historyindex);
   }
