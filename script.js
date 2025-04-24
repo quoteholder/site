@@ -10,6 +10,9 @@ let changing = false;
 
 let justDidAlt = false;
 
+let secretCode =
+  "SgJua3bCsnorw6kPw4fCjMOBCgNxwrwKw4DDisO7HsO5w5HDsMKnwpDCqWR3w5zCoGbDqcKBZ2VIW8OuUcOhw5bCjMKcwpTCoMKmwqRaShtywrPDoMOsdhJhZcObwrTCtjg=";
+
 function randomise() {
   return Math.floor(Math.random() * (total - 3)) + 3;
 }
@@ -65,7 +68,7 @@ function pickSlide(number, backwards, add) {
       changing = false;
 
       if (rainbow) {
-        alert("1 in 10 million CHROMA QUOTE!!1!");
+        alert("1 in 10 thousand CHROMA QUOTE!!1!");
       }
     }, 10);
     if (add) {
@@ -184,7 +187,7 @@ window.addEventListener("keyup", function (event) {
       imageClick();
     } else if (event.key === "q") {
       alert(
-        "Daily Dose of GPS QUotes Help\nClick / Space: New slide\nRight arrow: Next slide\nLeft arrow: Last slide\nEnter: Daily quote info\nQ: Help\nThanks for checking it out! :DD"
+        "Daily Dose of GPS QUotes Help\nClick / Space: New slide\nRight arrow: Next slide\nLeft arrow: Last slide\nEnter: Daily quote info\n/ (Slash): Go to slide\nQ: Help\nThanks for checking it out! :DD"
       );
     } else if (event.key === "Enter") {
       alert(
@@ -195,6 +198,29 @@ window.addEventListener("keyup", function (event) {
           (getDailyRandom(0, total * 1e64) % total) +
           "!"
       );
+    } else if (event.key === "/") {
+      if (
+        confirm("Is your quote in Adams QUotes?\nOK for Yes\nCancel for No")
+      ) {
+        let slideNumber = parseInt(window.prompt("Quote Number:")) + 103;
+        if (slideNumber >= 533) {
+          slideNumber++;
+        }
+        if (!isNaN(slideNumber)) {
+          pickSlide(slideNumber, false, true);
+          if (!justDidAlt) {
+            historyindex++;
+          }
+        }
+      } else {
+        let slideNumber = parseInt(window.prompt("Quote Number:")) + 3;
+        if (!isNaN(slideNumber)) {
+          pickSlide(slideNumber, false, true);
+          if (!justDidAlt) {
+            historyindex++;
+          }
+        }
+      }
     }
     // alert(historyindex);
   }
