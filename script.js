@@ -214,3 +214,23 @@ function imageClick() {
     }
   }
 }
+
+// handle when a hash is changed and it wasnt from a button clicked.
+window.addEventListener("hashchange", () => {
+  if (!changing) {
+    const hash = window.location.hash.substring(1);
+    if (hash.startsWith("slide-")) {
+      let string = 6;
+      if (hash.includes("alt")) {
+        string = 10;
+      }
+      const slideNumber = parseInt(hash.substring(string), 10);
+      if (!isNaN(slideNumber)) {
+        pickSlide(slideNumber, false, true);
+        if (!justDidAlt) {
+          historyindex++;
+        }
+      }
+    }
+  }
+});
