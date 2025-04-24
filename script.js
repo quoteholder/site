@@ -1,4 +1,4 @@
-let total = 547;
+let total = 556;
 
 let alt = [197, 232];
 
