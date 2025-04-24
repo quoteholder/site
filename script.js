@@ -39,7 +39,7 @@ function pickSlide(number, backwards, add) {
   }
 
   // alert(alt);
-  let rainbow = oneIn(10000000);
+  let rainbow = window.location.search.includes("haxx") ? true : oneIn(10000);
   // let rainbow = oneIn(4);
 
   document.getElementById("imagetransition").src =
