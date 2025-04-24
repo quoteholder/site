@@ -117,6 +117,8 @@ if (window.location.hash) {
 function daysSinceDate(dateString) {
   const now = new Date();
   const pastDate = new Date(dateString);
+  now.setHours(0, 0, 0, 0);
+  pastDate.setHours(0, 0, 0, 0);
   const timeDifference = now.getTime() - pastDate.getTime();
   const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
   return daysDifference;
